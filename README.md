@@ -21,9 +21,9 @@ This is a Java application that converts a custom shorthand text format into wel
 
 p.bold(id='myId') = 'This is bold text with an ID.'
 
-```**General syntax format**
-| - |
-|Element.modifiers(attributes) = 'content' |
+**General syntax format**
+```LightML
+Element.modifiers(attributes) = 'content'
 ```
 
 
