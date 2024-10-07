@@ -3,7 +3,7 @@
 **A shorthand markup language for HTML**  
 
 **By Paul Craig  07/10/2024**  
-
+<hr>
 **Overview** 
 
 This is a Java application that converts a custom shorthand text format into well- formatted HTML. It supports various HTML elements like paragraphs, divs, forms, links, images, and even advanced layout frameworks like Bootstrap and Tailwind. Each element can include attributes (e.g., id, class) and modifiers for text styling (e.g., bold, italics). 
@@ -16,23 +16,16 @@ This is a Java application that converts a custom shorthand text format into wel
 - Handles layout frameworks like Bootstrap and Tailwind with simple shorthand commands. 
 - Supports attributes for HTML tags (e.g., id, class), and these can be included inside parentheses. 
 
-**Shorthand Syntax** 
-
-
-p.bold(id='myId') = 'This is bold text with an ID.'
 
 **General syntax format**
 ```LightML
 Element.modifiers(attributes) = 'content'
 ```
-
-
-
 - **element**: The HTML tag you want to generate (e.g., p, div, img, a, etc.). 
 - **modifiers**: Optional text modifiers like bold, italics, strong (for paragraphs). 
 - **attributes**: Optional attributes enclosed in parentheses (e.g., id='example', class='myClass'). 
 - **content**: The inner content to be placed inside the element, enclosed in single quotes ('). For some tags the content will sit between the closing and opening tags for others it appends inside the tag itself. 
-
+<hr>
 **Supported Elements** 
 
 Here’s a breakdown of the supported elements with their LightML shorthand and the HTML output. 
@@ -75,7 +68,7 @@ text = 'This is text.'
 -
 <p>This is text.</p>
 ```
-
+<hr>
 **Divs (div)**
 
 The shorthand for creating a div block supports attributes and nested content inside {}. You can include classes and IDs inside the div tag. Div’s also support multiple nested elements. 
@@ -96,7 +89,7 @@ p = 'This is inside a container div.' }
     <p>This is inside a container div.</p> 
 </div>
 ```
-
+<hr>
 **Forms (form) and Input Fields**
 
 Forms are declared using the form keyword, and input fields are declared using their respective types (e.g., input-text, input-email). 
@@ -119,7 +112,7 @@ form {
  <input type="email" id="email" name="email">
 </form>
 ```
-
+<hr>
 **Links** 
 
 Shorthand for creating hyperlinks follows the format: (link = 'linkText,URL'). **Input:** 
@@ -135,7 +128,7 @@ link = 'Google, https://www.google.com'
 -
 <a href="https://www.google.com">Google</a>
 ```
-
+<hr>
 **Images (img)** 
 
 Shorthand for images allows attributes such as alt, width, height, etc. Attributes are defined inside parentheses after img. 
@@ -158,7 +151,7 @@ image(alt='A sample image' width='300') = 'image.jpg'
 -
 <img src="image.jpg" alt="A sample image" width="300">
 ```
-
+<hr>
 **Scripts and Stylesheets** 
 Scripts and stylesheets can be added using the script/js and css/stylesheet keywords. The path to the file is given after =. 
 
@@ -178,11 +171,10 @@ stylesheet = 'styles.css' js = 'app.js'
 - 
 <link rel="stylesheet" href="styles.css"> <script src="app.js" defer></script> 
 ```
-
+<hr>
 **Layout Frameworks: Bootstrap and Tailwind** 
 
 The application supports layout frameworks like **Bootstrap** and **Tailwind** with simple shorthand commands. 
-
 
 ```
 **LightML** 
@@ -217,10 +209,8 @@ label = 'username'
 -
 <label for="username">username</label>
 ```
-
+<hr>
 **Line Breaks (br) and Horizontal Rules (hr)** 
-
-The application supports the shorthand for adding line breaks (<br>) and horizontal rules (<hr>). 
 
 **Input:** 
 ```
@@ -272,7 +262,7 @@ html-head(<div>  <p>this text</p> </div>)
 </head>
 
 ```
-
+<hr>
 **Example Shorthand File** 
 
 Here’s an example of a LightML file and the HTML that it translates into: 
@@ -343,7 +333,7 @@ footer {
 </body>
 </html>
 ```
-
+<hr>
 **Future Expansion** 
 
 As the application evolves, I aim to expand its functionality by adding support for additional HTML tags and incorporating more advanced shorthand for popular CSS frameworks like **Bootstrap** and **Tailwind**. This section outlines some of the future features and shorthand syntax that will be added. 
@@ -437,10 +427,8 @@ tw-gallery-3x3 = './imagesfolder/'
  <img src="./imagesfolder/image2.jpg" class="w-full h-auto">
  <img src="./imagesfolder/image3.jpg" class="w-full h-auto">
 </div>
-
-**tw-navbar:** A Tailwind navbar shorthand for generating a responsive navigation bar with a branding logo and links. 
-
-
+```
+<hr>
 **Expanding HTML Element Support** 
 
 In addition to the framework-specific components, the application will support an extended range of common HTML elements and components to streamline development. 
