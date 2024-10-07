@@ -22,7 +22,7 @@ This is a Java application that converts a custom shorthand text format into wel
 
 |**General syntax format** |
 | - |
-|Element.modifiers(attributes) = 'content' |
+|```Element.modifiers(attributes) = 'content' |
 
 
 
@@ -45,13 +45,13 @@ The application supports text modifiers like bold, italics, strong, etc. These a
 
 |**LightML** |
 | - |
-|p.bold(id='myId') = 'This is bold text with an ID.' |
+|```p.bold(id='myId') = 'This is bold text with an ID.' |
 
 **Output:** 
 
 |**HTML** |
 | - |
-|<p id="myId"><b>This is bold text with an ID.</b></p> |
+|```<p id="myId"><b>This is bold text with an ID.</b></p> |
 
 Modifiers include: 
 
