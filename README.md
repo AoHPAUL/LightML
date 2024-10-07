@@ -18,11 +18,12 @@ This is a Java application that converts a custom shorthand text format into wel
 
 **Shorthand Syntax** 
 
-
+```lightml
+p.bold(id='myId') = 'This is bold text with an ID.'
 
 |**General syntax format** |
 | - |
-|```Element.modifiers(attributes) = 'content' |
+|Element.modifiers(attributes) = 'content' |
 
 
 
