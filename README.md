@@ -2,11 +2,13 @@
 
 **A shorthand markup language for HTML**  
 
-**By Paul Craig  07/10/2024**  
+**By Paul Craig - Updated: 09/10/2024**  
+
 <hr>
+
 **Overview** 
 
-This is a Java application that converts a custom shorthand text format into well- formatted HTML. It supports various HTML elements like paragraphs, divs, forms, links, images, and even advanced layout frameworks like Bootstrap and Tailwind. Each element can include attributes (e.g., id, class) and modifiers for text styling (e.g., bold, italics). 
+This is a Java application that converts a custom shorthand text format into well- formatted HTML. It supports various HTML elements like paragraphs, divs, forms, links, images, and even advanced layout frameworks like Bootstrap and Tailwind. Each element can include attributes (e.g., id, class) and modifiers for text styling (e.g., bold, italics).
 
 **Key Features** 
 
@@ -16,6 +18,8 @@ This is a Java application that converts a custom shorthand text format into wel
 - Handles layout frameworks like Bootstrap and Tailwind with simple shorthand commands. 
 - Supports attributes for HTML tags (e.g., id, class), and these can be included inside parentheses. 
 
+**Variable & functional Support**
+- I recently added support for variables in the form of ($variable = value). This will be expanded with functions, if/else & loops
 
 **General syntax format**
 ```LightML
@@ -36,15 +40,13 @@ The application supports text modifiers like bold, italics, strong, etc. These a
 
 **Input:** 
 ```
-**LightML**
--
+LightML
 p.bold(id='myId') = 'This is bold text with an ID.'
 ```
 
 **Output:** 
 ```
-**HTML**
-- 
+HTML
 <p id="myId"><b>This is bold text with an ID.</b></p>
 ```
 Modifiers include: 
@@ -57,15 +59,13 @@ Text can also be included by writing “text = ‘user-content’”
 
 **Input:** 
 ```
-**LightML**
-- 
+LightML
 text = 'This is text.'
 ```
 
 **Output:** 
 ```
-**HTML**
--
+HTML
 <p>This is text.</p>
 ```
 <hr>
@@ -75,16 +75,14 @@ The shorthand for creating a div block supports attributes and nested content in
 
 **Input:** 
 ```
-**LightML**
--
+LightML
 div(class='container') {
 p = 'This is inside a container div.' }
 ```
 
 **Output:** 
 ```
-**HTML**
--
+HTML
 <div class="container">
     <p>This is inside a container div.</p> 
 </div>
@@ -96,8 +94,7 @@ Forms are declared using the form keyword, and input fields are declared using t
 
 **Input:** 
 ```
-**LightML**
--
+LightML
 form {
  input-text(id='username') = 'username'
  input-email(id='email') = 'email'
@@ -105,8 +102,7 @@ form {
 ```
 **Output:** 
 ```
-**HTML**
--
+HTML
 <form>
  <input type="text" id="username" name="username">
  <input type="email" id="email" name="email">
@@ -118,14 +114,12 @@ form {
 Shorthand for creating hyperlinks follows the format: (link = 'linkText,URL'). **Input:** 
 
 ```
-**LightML**
--
+LightML
 link = 'Google, https://www.google.com'
 ```
 **Output:** 
 ```
-**HTML**
--
+HTML
 <a href="https://www.google.com">Google</a>
 ```
 <hr>
@@ -136,19 +130,16 @@ Shorthand for images allows attributes such as alt, width, height, etc. Attribut
 **Input:** 
 ```
 LightML
-- 
 img(alt='A sample image' width='300') = 'image.jpg' 
 ```
 You can also use image instead of img in LightML. 
 ```
 LightML
--
 image(alt='A sample image' width='300') = 'image.jpg' 
 ```
 **Output:** 
 ```
-**HTML**
--
+HTML
 <img src="image.jpg" alt="A sample image" width="300">
 ```
 <hr>
@@ -157,18 +148,15 @@ Scripts and stylesheets can be added using the script/js and css/stylesheet keyw
 
 **Input:** 
 ```
-**LightML**
-- 
+LightML
 css = 'styles.css' script = 'app.js'
 
-**LightML (alternate)**
--
+LightML (alternate)
 stylesheet = 'styles.css' js = 'app.js'
 ```
 **Output:** 
 ```
-**HTML** 
-- 
+HTML
 <link rel="stylesheet" href="styles.css"> <script src="app.js" defer></script> 
 ```
 <hr>
@@ -177,21 +165,18 @@ stylesheet = 'styles.css' js = 'app.js'
 The application supports layout frameworks like **Bootstrap** and **Tailwind** with simple shorthand commands. 
 
 ```
-**LightML** 
-- 
+LightML
 bootstrap tailwind 
 ```
 **Output for Bootstrap:** 
 ```
-**HTML**
-- 
+HTML
 <p><link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous"> </p><p><script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script> </p>
 ```
 
 **Output for Tailwind:** 
 ```
-**HTML**
--
+HTML
 <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 ```
 
@@ -199,14 +184,12 @@ bootstrap tailwind
 Labels can be defined with a for attribute linked to an input field. **Input:** 
 
 ```
-**LightML** 
-- 
+LightML
 label = 'username' 
 ```
 **Output:** 
 ```
-**HTML** 
--
+HTML
 <label for="username">username</label>
 ```
 <hr>
@@ -214,15 +197,13 @@ label = 'username'
 
 **Input:** 
 ```
-**LightML**
-- 
+LightML
 br
 hr
 ```
 **Output:** 
 ```
-**HTML** 
-- 
+HTML
 <br> 
 <hr>
 ```
@@ -233,28 +214,24 @@ In order to build the shorthand as flexible as possible I added the ability to d
 
 **Input:** 
 ```
-**LightML** 
-- 
+LightML
 <p>html(<div> </p><p>` `<p>this text</p> </div>) </p>
 ```
 
 **Output:** 
 ```
-**HTML**
-- 
+HTML
 <p><div> </p><p>` `<p>this text</p> </div> </p>
 ```
 
 With this you can also add html directly to the head of the document if needed:
 ```
-**LightML**
-- 
+LightML
 html-head(<div>  <p>this text</p> </div>)
 ```
 **Output:**
 ```
-**HTML**
--
+HTML
 <head>
  <div>
  <p>this text</p>
@@ -269,8 +246,7 @@ Here’s an example of a LightML file and the HTML that it translates into:
 
 **LightML input:**
 ```
-**LightML**
--
+LightML
 title = 'My Web Page'
 css = 'styles.css'
 nav {
@@ -297,8 +273,7 @@ footer {
 ```
 **HTML Output** 
 ```
-**HTML** 
-- 
+HTML
 <!DOCTYPE html>
 <html>
 <head>
@@ -350,14 +325,12 @@ Examples of the planned Bootstrap-specific shorthand commands:
 
 **Input:** 
 ```
-**LightML**
-- 
+LightML
 bs-gallery-3x3 = './imagesfolder/' 
 ```
 **Output:** 
 ```
-**HTML**
--
+HTML
 <div class="row">
  <div class="col-4">
  <img src="./imagesfolder/image1.jpg" class="img-fluid">
@@ -377,8 +350,7 @@ The LightML shorthand will allow you to declare folders of images to be used in 
 
 and branding. **Input:** 
 ```
-**LightML**
--
+LightML
 bs-navigation{
 brand='MySite', logo =’MyLogo.jpg’, 
 links='Home:index.html,About:about.html,Contact:contact.html'
@@ -386,8 +358,7 @@ links='Home:index.html,About:about.html,Contact:contact.html'
 ```
 **Output:** 
 ```
-**HTML** 
-- 
+HTML
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
  <a class="navbar-brand" href="#">MySite</a>
  <div class="collapse navbar-collapse">
@@ -414,14 +385,12 @@ For developers working with **Tailwind CSS**, the application will include simil
 
 **Input:** 
 ```
-**LightML**
--
+LightML
 tw-gallery-3x3 = './imagesfolder/'
 ```
 **Output:** 
 ```
-**HTML**
-- 
+HTML
 <div class="grid grid-cols-3 gap-4">
  <img src="./imagesfolder/image1.jpg" class="w-full h-auto">
  <img src="./imagesfolder/image2.jpg" class="w-full h-auto">
