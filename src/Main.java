@@ -3,12 +3,15 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Main {
     ArrayList<String> head = new ArrayList<>(); // Contains the starting HTML elements like <!DOCTYPE html> and all tags inside <head></head>
     ArrayList<String> body = new ArrayList<>(); // Contains the body HTML elements <body></body>
     Scanner input = new Scanner(System.in); // Used for user input
-    Tags tags = new Tags(); // Create instance of tags class
+    static Tags tags = new Tags(); // Create instance of tags class
+    Variable variables = new Variable(); // Create instance of variable class
     Stack<String> tagStack = new Stack<>(); // Stores open tags and uses them to check for lists and close tags properly
     public Main(){}
 
@@ -31,6 +34,23 @@ public class Main {
 
             while (myReader.hasNextLine()) {
                 String line = myReader.nextLine();
+
+                // Check if variable is declared
+                if (line.trim().toLowerCase().startsWith("var")){
+                    String[] parts = line.split("=");
+                    if (parts.length == 2) {
+                        String variableName = parts[0].trim().substring(1);  // Remove '$' symbol
+                        String value = parts[1].trim().replace("'", "");    // Remove quotes
+
+                        main.variables.setVariable(variableName, value);
+                        continue;  // Skip further processing as it’s a variable definition
+                    }
+                }
+
+                // Check if line uses a variable
+                if (line.startsWith("$")){
+                    line = tags.replaceVariables(line);
+                }
 
                 // Check the tagStack if the last tag is ul and surround all HTML elements in <li> tags </li>
                 if (!main.tagStack.isEmpty()) {
@@ -76,6 +96,7 @@ public class Main {
 
                 // Check for } closing bracket
                 if (main.checkClose(line)) {
+                    currentLine = "*-*";
                     continue;
                 }
 
@@ -208,6 +229,5 @@ public class Main {
             e.printStackTrace();
         }
     }
-
-
 }
+

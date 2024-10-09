@@ -6,10 +6,13 @@ public class Tags {
 
     // List of valid parent tags
     private ArrayList<String> validParentTags = new ArrayList<String>();
-
+    Variable variables = new Variable();
+    // Main main = new Main();
+    public Tags(){}
 
     // Method to check for parent tags and return HTML opening and closing tags
     public String[] checkParent(String line) {
+
         // List of valid parent tags
         ArrayList<String> validParentTags = new ArrayList<>();
         validParentTags.add("div");
@@ -78,6 +81,23 @@ public class Tags {
         } else {
             attribute = "";
         }
+        // Check for variable references in attributes and content
+        if (attribute != null && attribute.contains("$")) {
+            attribute = replaceVariables(attribute);
+        }
+        if (content != null && content.contains("$")) {
+            content = replaceVariables(content);
+        }
+        // Check for variable references in attributes, content and tag
+        if (attribute != null && attribute.contains("$")) {
+            attribute = replaceVariables(attribute);
+        }
+        if (content != null && content.contains("$")) {
+            content = replaceVariables(content);
+        }
+        if (tag != null && tag.contains("$")) {
+            tag = replaceVariables(tag);
+        }
         // Check if tag has # at start (this declares a <head> placement </head>)
         if(tag.trim().startsWith("#")){
             returnStatement = "#";
@@ -121,6 +141,12 @@ public class Tags {
             content = parseText(content);
             returnStatement += "<p"+ attribute + ">"+ content + "</p>";
         }
+        // Manage label
+        if (tag.trim().equalsIgnoreCase("label") || tag.trim().equalsIgnoreCase("lbl")){
+            content = content.replace("'","");
+            content = parseText(content);
+            returnStatement += "<label"+ attribute + ">"+ content + "</label>";
+        }
         // Manage images
         else if (tag.trim().equalsIgnoreCase("image") || tag.trim().equalsIgnoreCase("img")) {
             content.replace("'","");
@@ -157,6 +183,14 @@ public class Tags {
         // Manage HR
         else if (tag.trim().equalsIgnoreCase("hr")) {
             returnStatement = "<hr>";
+        }
+        // Manage raw HTML
+        else if (tag.trim().equalsIgnoreCase("html")) {
+            returnStatement = content;
+        }
+        // Manage raw HTML-head
+        else if (tag.trim().equalsIgnoreCase("#")) {
+            returnStatement = "#"+content;
         }
         // Manage ul
         else if (tag.trim().equalsIgnoreCase("ul") || tag.trim().equalsIgnoreCase("list")) {
@@ -218,4 +252,49 @@ public class Tags {
 
         return text;
     }
+    public String replaceVariables(String line) {
+        // Handle variable assignment like $variable = value
+        Pattern assignmentPattern = Pattern.compile("\\$(\\w+)\\s*=\\s*(.+)");
+        Matcher assignmentMatcher = assignmentPattern.matcher(line);
+
+        if (assignmentMatcher.find()) {
+            String variableName = assignmentMatcher.group(1); // Extract variable name (without the $ sign)
+            String value = assignmentMatcher.group(2).trim(); // Extract value and trim any whitespace
+
+            // Check if the variable already exists
+            if (variables.variableExists(variableName)) {
+                // Update the value of the existing variable
+                System.out.println("Updating variable: " + variableName + " to value: " + value);
+                variables.setVariable(variableName, value);
+            } else {
+                // Add the variable as a new pair
+                System.out.println("Adding new variable: " + variableName + " with value: " + value);
+                variables.setVariable(variableName, value);
+            }
+
+            // Remove the assignment statement from the line (since it has been processed)
+            line = line.replaceFirst(Pattern.quote(assignmentMatcher.group(0)), "").trim();
+        }
+
+        // A regular expression to match a variable reference, e.g., $varName
+        Pattern pattern = Pattern.compile("\\$(\\w+)");
+        Matcher matcher = pattern.matcher(line);
+
+        while (matcher.find()) {
+            String variableName = matcher.group(1);
+
+            if (variables.variableExists(variableName)) {
+                String value = variables.getVariable(variableName);
+                // Replace the variable with its value in the line
+                System.out.println("Adding: variable: " + variableName + ", value: " + value);
+                line = line.replace("$" + variableName, value);
+            } else {
+                // Remove the variable reference if it doesn't exist
+                System.out.println("Cannot find: variable: " + variableName);
+                line = line.replace("$" + variableName, "");
+            }
+        }
+        return line;
+    }
+
 }
