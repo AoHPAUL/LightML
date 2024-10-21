@@ -1,6 +1,4 @@
-**Light ML Documentation** 
-
-**A shorthand markup language for HTML**  
+**Light ML - A shorthand markup language for HTML**  
 
 **By Paul Craig - Updated: 21/10/2024**  
 
