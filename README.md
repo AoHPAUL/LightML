@@ -14,6 +14,7 @@ Light ML is a custom shorthand I wrote to make building websites faster. It uses
 - Supports attributes for HTML tags (e.g., id, class), and these can be included inside parentheses. If combined with variables this is quite powerful.
 
 **Bootshorts**
+
 I created a shorthand for commonly used bootstrap components, I have gave these the name of bootshorts. Here are some of the implemented bootshorts that exist so far:
 - Navigation
 - Hero Section
@@ -21,6 +22,7 @@ I created a shorthand for commonly used bootstrap components, I have gave these 
 - Gallerys
 - Buttons
 - Alerts
+
 These bootshort components allow users to rapidly build responsive web pages and should increase productivity when building a website.
 
 **General syntax format**
